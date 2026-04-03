@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vishvanath Madasamy</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  /* ── LIGHT THEME (default) ── */
+  :root {
+    --navy: #f8faff;
+    --navy2: #eef2ff;
+    --blue: #1a6cf6;
+    --blue2: #1558d6;
+    --cyan: #0ea5e9;
+    --purple: #7c3aed;
+    --white: #0f172a;
+    --muted: #64748b;
+    --card: #ffffff;
+    --border: rgba(15,23,42,0.09);
+    --glow: rgba(26,108,246,0.08);
+    --hero-grid-opacity: 0.07;
+    --hero-grid-color: rgba(26,108,246,0.4);
+    --nav-bg: rgba(248,250,255,0.92);
+    --nav-bg-scroll: rgba(248,250,255,0.98);
+    --hero-name-from: #0f172a;
+    --hero-desc: #64748b;
+    --about-bg: rgba(0,0,0,0.015);
+    --skills-bg: rgba(0,0,0,0.015);
+    --contact-bg: linear-gradient(135deg,rgba(26,108,246,0.06) 0%,rgba(124,58,237,0.04) 100%);
+    --exp-bullet: #64748b;
+    --skill-tag-bg: rgba(26,108,246,0.06);
+    --skill-tag-border: rgba(26,108,246,0.12);
+    --skill-tag-color: #1558d6;
+    --photo-bg: linear-gradient(135deg, #dbeafe, #eff6ff);
+    --shadow: 0 2px 12px rgba(15,23,42,0.06);
+  }
+
+  /* ── DARK THEME ── */
+  body.dark {
+    --navy: #050d1f;
+    --navy2: #0a1628;
+    --blue: #1a6cf6;
+    --blue2: #3d8bff;
+    --cyan: #00d4ff;
+    --purple: #7c3aed;
+    --white: #f0f4ff;
+    --muted: #8899bb;
+    --card: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.08);
+    --glow: rgba(26,108,246,0.15);
+    --hero-grid-opacity: 0.06;
+    --hero-grid-color: rgba(255,255,255,0.5);
+    --nav-bg: rgba(5,13,31,0.85);
+    --nav-bg-scroll: rgba(5,13,31,0.97);
+    --hero-name-from: #ffffff;
+    --hero-desc: rgba(240,244,255,0.65);
+    --about-bg: rgba(255,255,255,0.015);
+    --skills-bg: rgba(255,255,255,0.015);
+    --contact-bg: linear-gradient(135deg,rgba(26,108,246,0.06) 0%,rgba(124,58,237,0.04) 100%);
+    --exp-bullet: rgba(240,244,255,0.7);
+    --skill-tag-bg: rgba(255,255,255,0.06);
+    --skill-tag-border: rgba(255,255,255,0.08);
+    --skill-tag-color: rgba(240,244,255,0.75);
+    --photo-bg: linear-gradient(135deg, #1a2a4a, #0a1628);
+    --shadow: none;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── CURSOR ── */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--cyan);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid rgba(0,212,255,0.4);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transition: transform 0.25s ease, width 0.2s, height 0.2s;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.4rem;
+    background: linear-gradient(135deg, var(--blue2), var(--cyan));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem; font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1.5px; background: var(--blue);
+    transform: scaleX(0); transition: transform 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 4rem; max-width: 1200px; margin: 0 auto; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    position: relative;
+    padding-top: 6rem;
+    max-width: 100%;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(26,108,246,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(124,58,237,0.08) 0%, transparent 60%);
+    transition: background 0.4s;
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0; overflow: hidden;
+    opacity: var(--hero-grid-opacity);
+    background-image:
+      linear-gradient(var(--hero-grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hero-grid-color) 1px, transparent 1px);
+    background-size: 60px 60px;
+    transition: opacity 0.4s;
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(26,108,246,0.12);
+    border: 1px solid rgba(26,108,246,0.3);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 0.82rem; font-weight: 500;
+    color: var(--blue2); letter-spacing: 0.5px;
+    margin-bottom: 1.8rem;
+    opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .badge-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .hero-photo {
+    width: 130px; height: 130px; border-radius: 50%;
+    border: 3px solid rgba(26,108,246,0.4);
+    box-shadow: 0 0 40px rgba(26,108,246,0.25), 0 0 0 8px rgba(26,108,246,0.06);
+    object-fit: cover; margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+    background: var(--navy2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem; overflow: hidden;
+  }
+  .hero-photo-placeholder {
+    width: 130px; height: 130px; border-radius: 50%;
+    border: 3px solid rgba(26,108,246,0.4);
+    box-shadow: 0 0 40px rgba(26,108,246,0.25), 0 0 0 8px rgba(26,108,246,0.06);
+    margin: 0 auto 2rem;
+    background: var(--photo-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 2.8rem;
+    color: var(--blue2); letter-spacing: -2px;
+    opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+  }
+  h1.hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 500; letter-spacing: -2px;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+    opacity: 0; animation: fadeUp 0.7s 0.3s forwards;
+  }
+  h1.hero-name span {
+    background: linear-gradient(135deg, var(--hero-name-from) 20%, var(--blue) 60%, var(--cyan) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-title {
+    font-size: 1.1rem; color: var(--muted); font-weight: 300;
+    letter-spacing: 1px; margin-bottom: 1.2rem;
+    opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
+  }
+  .hero-title strong { color: var(--blue2); font-weight: 500; }
+  .hero-desc {
+    max-width: 560px; margin: 0 auto 2.5rem;
+    color: var(--hero-desc);
+    font-size: 1rem; font-weight: 300; line-height: 1.8;
+    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+  }
+  .hero-email {
+    font-size: 0.88rem; color: var(--muted);
+    margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.7s 0.65s forwards;
+  }
+  .hero-email a { color: var(--blue2); text-decoration: none; }
+  .hero-email a:hover { color: var(--cyan); }
+  .hero-btns {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s 0.6s forwards;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0.85rem 2rem;
+    background: linear-gradient(135deg, var(--blue), var(--blue2));
+    color: white; text-decoration: none;
+    border-radius: 10px; font-weight: 500; font-size: 0.92rem;
+    border: none; cursor: pointer;
+    box-shadow: 0 4px 24px rgba(26,108,246,0.35);
+    transition: all 0.25s; letter-spacing: 0.2px;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(26,108,246,0.5);
+  }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0.85rem 2rem;
+    background: transparent;
+    color: var(--white); text-decoration: none;
+    border-radius: 10px; font-weight: 500; font-size: 0.92rem;
+    border: 1px solid var(--border); cursor: pointer;
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover {
+    background: var(--card);
+    border-color: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+  }
+  .btn-purple {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0.85rem 2rem;
+    background: linear-gradient(135deg, var(--purple), #9f5cff);
+    color: white; text-decoration: none;
+    border-radius: 10px; font-weight: 500; font-size: 0.92rem;
+    border: none; cursor: pointer;
+    box-shadow: 0 4px 24px rgba(124,58,237,0.35);
+    transition: all 0.25s;
+  }
+  .btn-purple:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(124,58,237,0.5);
+  }
+
+  /* ── SECTION TITLES ── */
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.4rem; font-weight: 700;
+    letter-spacing: -1px; margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  .section-line {
+    width: 50px; height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--cyan));
+    border-radius: 10px;
+    margin: 0 auto 3.5rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: rgba(255,255,255,0.015); }
+  .about-inner { max-width: 1200px; margin: 0 auto; }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: start; margin-bottom: 3rem;
+  }
+  .about-text p {
+    color: var(--muted);
+    font-size: 1.05rem; line-height: 1.85;
+    margin-bottom: 1.2rem; font-weight: 400;
+  }
+  .about-cards { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  .about-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+    transition: all 0.3s;
+  }
+  .about-card:hover {
+    background: rgba(26,108,246,0.06);
+    border-color: rgba(26,108,246,0.25);
+    transform: translateY(-3px);
+  }
+  .about-card-icon { font-size: 1.8rem; margin-bottom: 0.7rem; }
+  .about-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    margin-bottom: 0.4rem; color: var(--white);
+  }
+  .about-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .exp-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem 2rem;
+    position: relative; overflow: hidden;
+    transition: all 0.3s;
+    box-shadow: var(--shadow);
+  }
+  .exp-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--blue), var(--cyan));
+    border-radius: 3px 0 0 3px;
+  }
+  .exp-card:hover {
+    background: rgba(26,108,246,0.05);
+    border-color: rgba(26,108,246,0.25);
+    transform: translateX(4px);
+  }
+  .exp-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; margin-bottom: 0.3rem; gap: 1rem;
+  }
+  .exp-company {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.82rem; color: var(--blue2); font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+  .exp-company-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--blue2);
+  }
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem; font-weight: 700; color: var(--white);
+  }
+  .exp-date {
+    background: rgba(26,108,246,0.12);
+    border: 1px solid rgba(26,108,246,0.2);
+    color: var(--blue2); font-size: 0.78rem;
+    padding: 4px 12px; border-radius: 100px;
+    white-space: nowrap; font-weight: 500;
+  }
+  .exp-bullets {
+    margin-top: 1rem; padding-left: 0;
+    list-style: none; display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .exp-bullets li {
+    color: var(--exp-bullet);
+    font-size: 0.92rem; font-weight: 400;
+    padding-left: 1.2rem; position: relative; line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--blue); font-size: 0.75rem; top: 3px;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: rgba(255,255,255,0.015); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    transition: all 0.3s;
+  }
+  .skill-card:hover {
+    background: rgba(26,108,246,0.04);
+    border-color: rgba(26,108,246,0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(26,108,246,0.08);
+  }
+  .skill-icon {
+    width: 46px; height: 46px;
+    background: rgba(26,108,246,0.08);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 1rem;
+  }
+  .skill-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    margin-bottom: 1rem; color: var(--white);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    background: var(--skill-tag-bg);
+    border: 1px solid var(--skill-tag-border);
+    color: var(--skill-tag-color);
+    font-size: 0.78rem; padding: 4px 10px;
+    border-radius: 6px; font-weight: 500;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover {
+    background: rgba(26,108,246,0.12);
+    border-color: rgba(26,108,246,0.3);
+    color: var(--blue);
+  }
+  .skills-bottom {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 1.5rem;
+  }
+  .skill-card-sm {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.4rem 1.6rem;
+    transition: all 0.3s;
+  }
+  .skill-card-sm:hover {
+    background: rgba(26,108,246,0.06);
+    border-color: rgba(26,108,246,0.25);
+    transform: translateY(-4px);
+  }
+  .skill-card-sm h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem; font-weight: 700;
+    margin-bottom: 0.8rem; color: var(--white);
+  }
+
+  /* ── EDUCATION ── */
+  .edu-cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .edu-section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--blue2); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .edu-card, .cert-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s;
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .edu-card:hover, .cert-card:hover {
+    background: rgba(26,108,246,0.06);
+    border-color: rgba(26,108,246,0.2);
+    transform: translateY(-3px);
+  }
+  .edu-logo, .cert-logo {
+    width: 46px; height: 46px; border-radius: 10px;
+    background: #ffffff1a;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+  }
+  .edu-info h4, .cert-info h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem; font-weight: 700;
+    color: var(--white); margin-bottom: 0.2rem;
+  }
+  .edu-info .edu-degree {
+    font-size: 0.83rem; color: var(--blue2); font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+  .edu-info .edu-meta, .cert-info .cert-issuer {
+    font-size: 0.8rem; color: var(--muted);
+  }
+
+  /* ── PROJECTS ── */
+  .project-slider-wrapper { position: relative; padding: 0 3rem; }
+  .project-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--blue); font-size: 1.1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; z-index: 10;
+    box-shadow: var(--shadow);
+  }
+  .project-arrow:hover {
+    background: rgba(26,108,246,0.1);
+    border-color: var(--blue);
+    transform: translateY(-50%) scale(1.08);
+  }
+  .project-arrow.left { left: 0; }
+  .project-arrow.right { right: 0; }
+  .project-slider-window { overflow: hidden; border-radius: 16px; }
+  .project-slider-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .project-slide { min-width: 100%; }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .project-media {
+    width: 100%; aspect-ratio: 16/9;
+    background: var(--navy2);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .project-media img,
+  .project-media iframe {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    position: absolute; inset: 0;
+    border: none;
+  }
+  .project-media-placeholder {
+    text-align: center; color: var(--muted);
+  }
+  .project-media-placeholder .play-icon {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(26,108,246,0.12);
+    border: 2px solid rgba(26,108,246,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+  }
+  .project-body { padding: 2rem 2.5rem; }
+  .project-number {
+    font-size: 0.75rem; color: var(--blue2);
+    font-weight: 600; letter-spacing: 1px;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+  }
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--white); margin-bottom: 0.8rem;
+  }
+  .project-purpose {
+    color: var(--muted); font-size: 0.95rem;
+    line-height: 1.8; margin-bottom: 1.4rem;
+  }
+  .project-footer {
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .project-github {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0.6rem 1.2rem;
+    background: rgba(26,108,246,0.1);
+    border: 1px solid rgba(26,108,246,0.25);
+    border-radius: 8px; color: var(--blue2);
+    font-size: 0.82rem; font-weight: 500;
+    text-decoration: none; transition: all 0.2s;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .project-github:hover { background: rgba(26,108,246,0.2); border-color: var(--blue); }
+  .project-dots {
+    display: flex; justify-content: center;
+    gap: 8px; margin-top: 1.8rem;
+  }
+  .project-dot {
+    height: 8px; border-radius: 100px;
+    background: var(--border); cursor: pointer;
+    transition: all 0.3s; width: 8px;
+  }
+  .project-dot.active {
+    background: var(--blue); width: 24px;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: linear-gradient(135deg, rgba(26,108,246,0.06) 0%, rgba(124,58,237,0.04) 100%);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    max-width: 100%;
+    padding: 7rem 4rem;
+  }
+  .contact-subtitle {
+    color: var(--muted); font-size: 1rem; font-weight: 300;
+    max-width: 480px; margin: 0.5rem auto 3rem;
+    line-height: 1.7;
+  }
+  .contact-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem; margin-bottom: 3rem;
+  }
+  .contact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem 1.5rem;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: block;
+  }
+  .contact-card:hover {
+    background: rgba(26,108,246,0.06);
+    border-color: rgba(26,108,246,0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(26,108,246,0.12);
+  }
+  .contact-card-icon {
+    width: 50px; height: 50px;
+    background: rgba(26,108,246,0.12);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin: 0 auto 1rem;
+  }
+  .contact-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--white); margin-bottom: 0.4rem;
+  }
+  .contact-card p { font-size: 0.83rem; color: var(--muted); }
+  .cta-box {
+    background: linear-gradient(135deg, rgba(26,108,246,0.1), rgba(124,58,237,0.08));
+    border: 1px solid rgba(26,108,246,0.2);
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 560px; margin: 0 auto;
+  }
+  .cta-box h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem; font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .cta-box p {
+    color: var(--muted); font-size: 0.9rem;
+    margin-bottom: 1.5rem; line-height: 1.7;
+  }
+  .footer-line {
+    margin-top: 4rem;
+    color: var(--muted); font-size: 0.82rem;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+  }
+
+  /* ── THEME TOGGLE ── */
+  .theme-toggle {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 14px 6px 10px;
+    cursor: pointer;
+    font-size: 0.8rem; font-weight: 600;
+    color: var(--muted);
+    transition: all 0.3s;
+    user-select: none;
+    box-shadow: var(--shadow);
+  }
+  .theme-toggle:hover { border-color: var(--blue); color: var(--blue); }
+  .toggle-track {
+    width: 34px; height: 18px;
+    background: var(--border);
+    border-radius: 100px;
+    position: relative; transition: background 0.3s; flex-shrink: 0;
+  }
+  body.dark .toggle-track { background: rgba(26,108,246,0.4); }
+  .toggle-thumb {
+    width: 14px; height: 14px;
+    background: var(--blue);
+    border-radius: 50%;
+    position: absolute; top: 2px; left: 2px;
+    transition: transform 0.3s;
+    box-shadow: 0 1px 4px rgba(26,108,246,0.4);
+  }
+  body.dark .toggle-thumb { transform: translateX(16px); }
+  .toggle-icon { font-size: 1rem; transition: all 0.3s; }
+
+  body, nav, .hero-bg, .hero-grid, .exp-card, .skill-card, .about-card,
+  .edu-card, .cert-card, .contact-card, .skill-card-sm, .cta-box, .project-card {
+    transition: background 0.35s ease, color 0.35s ease,
+                border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    section { padding: 5rem 1.5rem; }
+    #hero, #contact { padding: 5rem 1.5rem; }
+    .about-grid, .edu-cert-grid { grid-template-columns: 1fr; }
+    .skills-grid, .skills-bottom { grid-template-columns: 1fr 1fr; }
+    .contact-cards { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto 3rem; }
+    .nav-links { gap: 1.5rem; }
+    .project-slider-wrapper { padding: 0 2rem; }
+    .project-body { padding: 1.5rem; }
+  }
+  @media (max-width: 600px) {
+    .skills-grid, .skills-bottom { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    h1.hero-name { font-size: 2.4rem; }
+    .project-slider-wrapper { padding: 0 2rem; }
+    .project-footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-logo">VM</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+    <span class="toggle-icon" id="toggleIcon">☀️</span>
+    <div class="toggle-track"><div class="toggle-thumb"></div></div>
+    <span id="toggleLabel">Light</span>
+  </button>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      Available for opportunities
+    </div>
+
+    <img src="about/profile-pic2.png" alt="Vishvanath Madasamy" class="hero-photo" style="display:block;margin:0 auto 2rem;">
+
+    <h1 class="hero-name"><span>Vishvanath Madasamy</span></h1>
+    <p class="hero-title">
+      <strong>Data Scientist</strong> | ML &amp; LLM Systems | Analytics &amp; Decisioning
+    </p>
+    <p class="hero-desc">
+      AWS-certified engineer bridging data engineering, IT systems, and AI — building the infrastructure that transforms raw data into intelligent, production-ready solutions.
+    </p>
+    <p class="hero-email">✉ <a href="https://mail.google.com/mail/?view=cm&to=vishvanathmadasamyofficial@gmail.com" target="_blank"><span class="__cf_email__" data-cfemail="93e5fae0fbe5f2fdf2e7fbfef2f7f2e0f2feeafcf5f5faf0faf2ffd3f4fef2faffbdf0fcfe">[vishvanathmadasamyofficial@gmail.com]</span></a></p>
+    <div class="hero-btns">
+      <a href="https://www.linkedin.com/in/vishvanath-madasamy/" class="btn-primary" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn Profile
+      </a>
+      <a href="https://mail.google.com/mail/?view=cm&to=vishvanathmadasamyofficial@gmail.com" class="btn-secondary" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+        Get in Touch
+      </a>
+      <a href="C:\portfolio single side 2\resume.pdf" class="btn-purple" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        View Resume
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ABOUT ══════════════ -->
+<div id="about" style="background:rgba(255,255,255,0.015);">
+<section style="max-width:1200px;margin:0 auto;">
+  <p class="section-title reveal">About Me</p>
+  <div class="section-line reveal"></div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I'm a Data Engineer, AI Specialist, and IT Systems Architect with a passion for building intelligent infrastructure that actually works in the real world. I don't just analyze data — I design the systems that collect it, engineer the pipelines that move it, and build the AI that makes sense of it.</p>
+      <p>From cloud architecture on AWS and Azure to production ML systems and analytics dashboards, my work spans the full data-to-decision lifecycle — delivering measurable improvements in performance, cost, and business outcomes.</p>
+    </div>
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="about-card-icon">🧠</div>
+        <h3>Data Science &amp; AI</h3>
+        <p>From AI-powered fraud detection engines to cloud-scale analytics platforms and intelligent business applications — I design, build, and ship data systems that solve hard problems and deliver measurable outcomes.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">📊</div>
+        <h3>Analytics Platforms</h3>
+        <p>Engineered production-ready analytics infrastructure and end-to-end data pipelines at massive scale — transforming millions of daily records into live business intelligence that organizations can actually act on.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">☁️</div>
+        <h3>Cloud &amp; Infrastructure</h3>
+        <p>Designed and implemented scalable cloud architectures on AWS and Azure, ensuring high availability, security, and performance for data-intensive applications.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════════ EXPERIENCE ══════════════ -->
+<div id="experience">
+<section style="max-width:1200px;margin:0 auto;">
+  <p class="section-title reveal">Professional Experience</p>
+  <div class="section-line reveal"></div>
+
+  <div style="position:relative; padding: 0 0 2rem;">
+    <!-- Center line -->
+    <div style="position:absolute; left:50%; top:0; bottom:0; width:2px; background:linear-gradient(to bottom, var(--blue), var(--cyan)); transform:translateX(-50%); z-index:0;"></div>
+
+    <!-- CARD 1 — RIGHT SIDE -->
+    <div class="reveal" style="display:flex; justify-content:flex-end; position:relative; margin-bottom:3rem;">
+      <div style="position:absolute; left:50%; top:20px; width:14px; height:14px; background:var(--cyan); border-radius:50%; transform:translateX(-50%); box-shadow:0 0 16px var(--cyan); z-index:1;"></div>
+      <div style="position:absolute; left:50%; top:10px; transform:translateX(-110%); white-space:nowrap;">
+        <span class="exp-date">August 2025 – Present</span>
+      </div>
+      <div class="exp-card" style="width:45%; margin-left:5%;">
+        <div class="exp-company">
+          <img src="https://www.umassd.edu/media/supportingfiles/layoutassets/logos/umassd/stacked/umassd-stacked.png" alt="UMass Dartmouth" style="width:32px; height:32px; border-radius:6px; object-fit:contain; background:#fff; padding:3px; border:1px solid var(--border);">
+          <div class="exp-company-dot"></div>
+          University of Massachusetts Dartmouth
+        </div>
+        <div class="exp-header">
+          <div class="exp-role">IT System Analyst</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Managed and maintained campus-wide POS and access control systems (INFOR POS, UMass Pass, Lenel OnGuard), ensuring 99%+ uptime and seamless daily operations across the institution</li>
+          <li>Diagnosed and resolved complex hardware and software issues, reducing system downtime and delivering reliable performance for thousands of daily users</li>
+          <li>Partnered with IT and development teams to test, validate, and deploy system upgrades — ensuring zero-disruption rollouts across critical campus infrastructure</li>
+          <li>Drove data extraction, validation, and integrity checks that strengthened cross-system integration, audit readiness, and enterprise reporting accuracy</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CARD 2 — LEFT SIDE -->
+    <div class="reveal" style="display:flex; justify-content:flex-start; position:relative; margin-bottom:3rem;">
+      <div style="position:absolute; left:50%; top:20px; width:14px; height:14px; background:var(--cyan); border-radius:50%; transform:translateX(-50%); box-shadow:0 0 16px var(--cyan); z-index:1;"></div>
+      <div style="position:absolute; right:50%; top:10px; transform:translateX(110%); white-space:nowrap;">
+        <span class="exp-date">May 2024 – Oct 2024</span>
+      </div>
+      <div class="exp-card" style="width:45%; margin-right:5%;">
+        <div class="exp-company">
+          <img src="https://media.licdn.com/dms/image/v2/C510BAQHI9uftvVGlbA/company-logo_200_200/company-logo_200_200/0/1630575856911?e=2147483647&v=beta&t=-kBMvpWdJ0z7DEOZkLGKD5eexdp4mZUR3G-YyYSBWJw" alt="Value IBMS" style="width:32px; height:32px; border-radius:6px; object-fit:contain; background:#fff; padding:3px; border:1px solid var(--border);">
+          <div class="exp-company-dot"></div>
+          Value IBMS Pvt Ltd.
+        </div>
+        <div class="exp-header">
+          <div class="exp-role">Data Analyst</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Delivered end-to-end descriptive, predictive, and prescriptive analytics on large-scale cybersecurity datasets, uncovering actionable intelligence that directly boosted product sales by 30%</li>
+          <li>Engineered interactive Tableau dashboards and KPI reporting frameworks that transformed complex security data into clear, executive-ready business insights</li>
+          <li>Architected and deployed an automated SQL-based ETL pipeline that accelerated data preprocessing by 45%, eliminating bottlenecks and enabling faster, more reliable data flows</li>
+          <li>Drove cross-functional collaboration through streamlined data pipelines and shared KPI frameworks, exceeding team performance goals by an outstanding 67%</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CARD 3 — RIGHT SIDE -->
+    <div class="reveal" style="display:flex; justify-content:flex-end; position:relative; margin-bottom:3rem;">
+      <div style="position:absolute; left:50%; top:20px; width:14px; height:14px; background:var(--cyan); border-radius:50%; transform:translateX(-50%); box-shadow:0 0 16px var(--cyan); z-index:1;"></div>
+      <div style="position:absolute; left:50%; top:10px; transform:translateX(-110%); white-space:nowrap;">
+        <span class="exp-date">Jan 2024 – May 2024</span>
+      </div>
+      <div class="exp-card" style="width:45%; margin-left:5%;">
+        <div class="exp-company">
+          <img src="https://media.licdn.com/dms/image/v2/C510BAQHI9uftvVGlbA/company-logo_200_200/company-logo_200_200/0/1630575856911?e=2147483647&v=beta&t=-kBMvpWdJ0z7DEOZkLGKD5eexdp4mZUR3G-YyYSBWJw" alt="Value IBMS" style="width:32px; height:32px; border-radius:6px; object-fit:contain; background:#fff; padding:3px; border:1px solid var(--border);">
+          <div class="exp-company-dot"></div>
+          Value IBMS Pvt Ltd.
+        </div>
+        <div class="exp-header">
+          <div class="exp-role">IT System Analyst</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Led end-to-end data analysis of operational performance metrics, system requirements, and KPIs for the Chiller Plant Manager (CPM) project at Pune Metro Station — delivering a 37% improvement in building management system efficiency</li>
+          <li>Engineered data-driven control solutions and automated workflows that eliminated manual interventions, reducing human error and dramatically improving overall system reliability</li>
+          <li>Implemented advanced predictive maintenance techniques powered by real-time monitoring, enabling proactive issue detection and minimizing costly system downtime across critical metro infrastructure</li>
+          <li>Bridged the gap between IT systems and operational data by designing intelligent automation frameworks that optimized chiller plant performance at enterprise scale</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<!-- ══════════════ SKILLS ══════════════ -->
+<div id="skills" style="background:rgba(255,255,255,0.015);">
+<section style="max-width:1200px;margin:0 auto;">
+  <p class="section-title reveal">Skills &amp; Expertise</p>
+  <div class="section-line reveal"></div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">⌨️</div>
+      <h3>Programming &amp; Data</h3>
+      <ul class="exp-bullets">
+        <li>Python (Pandas, NumPy, Scikit-learn, PySpark)</li>
+        <li>SQL (PostgreSQL, MySQL, Redshift, Snowflake)</li>
+        <li>JavaScript/TypeScript</li>
+        <li>FastAPI</li>
+        <li>LangChain</li>
+      </ul>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🤖</div>
+      <h3>Machine Learning</h3>
+      <ul class="exp-bullets">
+        <li>Feature Engineering</li>
+        <li>Model Training &amp; Evaluation</li>
+        <li>Fine-tuning</li>
+        <li>SMOTE</li>
+        <li>LLMs (GPT-4, Claude)</li>
+        <li>A/B Testing</li>
+      </ul>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🗄️</div>
+      <h3>Databases &amp; Cloud</h3>
+      <ul class="exp-bullets">
+        <li>PostgreSQL</li>
+        <li>MySQL</li>
+        <li>Supabase</li>
+        <li>MongoDB</li>
+        <li>Azure SQL</li>
+        <li>Databricks</li>
+        <li>Apache Spark</li>
+        <li>AWS (S3, Lambda, Glue, Step Functions)</li>
+        <li>Azure (Data Factory, Databricks)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="skills-bottom">
+    <div class="skill-card-sm reveal">
+      <h3>📊 Data Analysis &amp; Visualization</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">QuickSight</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Cube.js</span>
+        <span class="skill-tag">DAX</span>
+        <span class="skill-tag">M-Code</span>
+      </div>
+    </div>
+    <div class="skill-card-sm reveal">
+      <h3>🔧 Version Control &amp; Tools</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Postman</span>
+        <span class="skill-tag">Swagger</span>
+        <span class="skill-tag">API Documentation</span>
+      </div>
+    </div>
+    <div class="skill-card-sm reveal">
+      <h3>⚙️ Model Operations</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Model monitoring</span>
+        <span class="skill-tag">Drift detection</span>
+        <span class="skill-tag">Cost optimization</span>
+        <span class="skill-tag">Production scoring</span>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════════ EDUCATION ══════════════ -->
+<div id="education">
+<section style="max-width:1200px;margin:0 auto;">
+  <p class="section-title reveal">Education &amp; Certifications</p>
+  <div class="section-line reveal"></div>
+  <div class="edu-cert-grid reveal">
+    <div>
+      <div class="edu-section-title">🎓 Education</div>
+      <div class="edu-card">
+        <div class="edu-logo">
+          <img src="https://www.commonapp.org/static/ca837569fe1067b36d48369ec017f9b6/university-massachusetts-dartmouth_415.png" style="width:36px; height:36px; object-fit:contain; border-radius:6px;">
+        </div>
+        <div class="edu-info">
+          <h4>Master of Science</h4>
+          <div class="edu-degree">MS in Data Science</div>
+          <div class="edu-meta">University of Massachusetts Dartmouth · North Dartmouth, MA · Aug 2024 – May 2026</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-logo">
+          <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/4/49/Anna_University_Logo.svg/1280px-Anna_University_Logo.svg.png" style="width:36px; height:36px; object-fit:contain; border-radius:6px;">
+        </div>
+        <div class="edu-info">
+          <h4>Bachelor of Engineering</h4>
+          <div class="edu-degree">Electronics and Communication Engineering</div>
+          <div class="edu-meta">Anna University · Chennai, India · Aug 2020 – Jul 2024</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="edu-section-title">🏅 Certifications</div>
+      <div class="cert-card">
+        <div class="cert-logo">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2xQcwKitRgXfqdi34DYlocPSEXD2G2zZipg&s" style="width:36px; height:36px; object-fit:contain; border-radius:6px;">
+        </div>
+        <div class="cert-info">
+          <h4>AWS Certified Cloud Practitioner</h4>
+          <div class="cert-issuer">Amazon Web Services</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-logo">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2xQcwKitRgXfqdi34DYlocPSEXD2G2zZipg&s" style="width:36px; height:36px; object-fit:contain; border-radius:6px;">
+        </div>
+        <div class="cert-info">
+          <h4>AWS Certified AI Practitioner</h4>
+          <div class="cert-issuer">Amazon Web Services</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-logo">
+          <img src="https://cdn.freebiesupply.com/logos/large/2x/microsoft-centered-logo-png-transparent.png" style="width:36px; height:36px; object-fit:contain; border-radius:6px;">
+        </div>
+        <div class="cert-info">
+          <h4>Microsoft Certified: Azure Data Scientist Associate</h4>
+          <div class="cert-issuer">Microsoft</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════════ PROJECTS ══════════════ -->
+<div id="projects" style="background:rgba(255,255,255,0.015);">
+<section style="max-width:1200px;margin:0 auto;">
+  <p class="section-title reveal">Projects</p>
+  <div class="section-line reveal"></div>
+
+  <div class="reveal" style="position:relative;">
+
+    <!-- Left Arrow -->
+    <button onclick="moveProjSlide(-1)" aria-label="Previous"
+      style="position:absolute; left:-22px; top:40%; transform:translateY(-50%); z-index:10;
+             width:44px; height:44px; border-radius:50%; background:var(--card);
+             border:1px solid var(--border); color:var(--blue); font-size:1.1rem;
+             cursor:pointer; display:flex; align-items:center; justify-content:center;
+             box-shadow:var(--shadow); transition:all 0.2s;">&#8592;</button>
+
+    <!-- Right Arrow -->
+    <button onclick="moveProjSlide(1)" aria-label="Next"
+      style="position:absolute; right:-22px; top:40%; transform:translateY(-50%); z-index:10;
+             width:44px; height:44px; border-radius:50%; background:var(--card);
+             border:1px solid var(--border); color:var(--blue); font-size:1.1rem;
+             cursor:pointer; display:flex; align-items:center; justify-content:center;
+             box-shadow:var(--shadow); transition:all 0.2s;">&#8594;</button>
+
+    <!-- Slider Window -->
+    <div style="overflow:hidden;">
+      <div id="projTrack" style="display:flex; gap:1.5rem; transition:transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change:transform;">
+
+        <!-- ══ PROJECT 1 ══ -->
+        <div style="min-width:calc(33.333% - 1rem); flex-shrink:0;">
+          <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column;">
+           
+            <!-- Media -->
+<div style="width:100%; aspect-ratio:16/9; background:var(--navy2); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; overflow:hidden;">
+  <video autoplay muted loop controls width="100%" height="100%" style="position:absolute; inset:0; object-fit:cover;">
+    <source src="projects\carrental.mp4" type="video/mp4">
+  </video>
+</div>
+            <!-- Info -->
+            <div style="padding:1.4rem; display:flex; flex-direction:column; flex:1; gap:0.5rem;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:0.68rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Subject:</span>
+                <span style="font-size:0.68rem; color:var(--blue2); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Database Design</span>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Title:</span>
+                <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); line-height:1.3; margin:0;">Car Rental Management System</h3>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px; flex:1;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Purpose:</span>
+                <p style="font-size:0.80rem; color:var(--muted); line-height:1.6; margin:0;">Developed a full-stack Car Rental Management System using HTML and CSS for the frontend, Python for the backend, and SQL Server Management Studio (SSMS) as the database — implementing vehicle inventory management, booking workflows, real-time availability search, dynamic pricing, complete CRUD operations, and an admin dashboard for fleet oversight, delivering a scalable, reliable, and production-ready system with strong data integrity and end-to-end operational efficiency.</p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:0.4rem; margin-top:0.2rem;">
+                <span class="skill-tag">HTML, CSS</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">SSMS SQL Server Management Studio.</span>
+              </div>
+              <a href="https://github.com/Vishvanath0523/Car-Rental-Management-System" target="_blank"
+                style="display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1rem;
+                       background:rgba(26,108,246,0.1); border:1px solid rgba(26,108,246,0.25);
+                       border-radius:8px; color:var(--blue2); font-size:0.78rem; font-weight:500;
+                       text-decoration:none; transition:all 0.2s; width:fit-content;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ PROJECT 2 ══ -->
+        <div style="min-width:calc(33.333% - 1rem); flex-shrink:0;">
+          <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column;">
+           
+            <!-- Media -->
+<div style="width:100%; aspect-ratio:16/9; background:var(--navy2); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; overflow:hidden;">
+  <video autoplay muted loop controls width="100%" height="100%" style="position:absolute; inset:0; object-fit:cover;">
+    <source src="projects\geoplastics.mp4" type="video/mp4">
+  </video>
+</div>
+            
+
+
+<div style="padding:1.4rem; display:flex; flex-direction:column; flex:1; gap:0.5rem;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:0.68rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Subject:</span>
+                <span style="font-size:0.68rem; color:var(--blue2); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Data Analytics & Visual Intelligence</span>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Title:</span>
+                <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); line-height:1.3; margin:0;">Global microplastics explorer—zoom, cluster, discover every ocean hotspot.</h3>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px; flex:1;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Purpose:</span>
+                <p style="font-size:0.80rem; color:var(--muted); line-height:1.6; margin:0;">Developed an interactive Global Microplastics Network Visualization system that maps and displays the worldwide distribution of microplastic pollution using node-based visual representation, enabling users to explore geographic data across global regions. Engineered a dynamic, clickable network where each node represents a specific location — upon selection, it renders detailed microplastic concentration data, pollution spread patterns, and regional statistics, delivering a powerful data-driven tool for environmental awareness and scientific analysis.</p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:0.4rem; margin-top:0.2rem;">
+                <span class="skill-tag">HTML, CSS</span>
+                <span class="skill-tag">JSON Data</span>
+                <span class="skill-tag">Visualization</span>
+                <span class="skill-tag">Delta Tables</span>
+              </div>
+              <a href="https://vishvanath0523.github.io/NOAA-NCEI-Marine-Microplastics-Interactive-visualization/" target="_blank"
+                style="display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1rem;
+                       background:rgba(26,108,246,0.1); border:1px solid rgba(26,108,246,0.25);
+                       border-radius:8px; color:var(--blue2); font-size:0.78rem; font-weight:500;
+                       text-decoration:none; transition:all 0.2s; width:fit-content;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ PROJECT 3 ══ -->
+        <div style="min-width:calc(33.333% - 1rem); flex-shrink:0;">
+          <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column;">
+           
+            <!-- Media -->
+<div style="width:100%; aspect-ratio:16/9; background:var(--navy2); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; overflow:hidden;">
+  <video autoplay muted loop controls width="100%" height="100%" style="position:absolute; inset:0; object-fit:cover;">
+    <source src="projects\massachusettslibraryaiassistant.mp4" type="video/mp4">
+  </video>
+</div>
+            <div style="padding:1.4rem; display:flex; flex-direction:column; flex:1; gap:0.5rem;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:0.68rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Subject:</span>
+                <span style="font-size:0.68rem; color:var(--blue2); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Natural Language Processing & Conversational AI</span>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Title:</span>
+                <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); line-height:1.3; margin:0;">Massachusetts Library Assistant Chatbot — Smart Conversational Support System</h3>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px; flex:1;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Purpose:</span>
+                <p style="font-size:0.80rem; color:var(--muted); line-height:1.6; margin:0;">Designed and developed an intelligent Massachusetts Library Assistant Chatbot using Python, Rasa, HTML, and CSS to automate and streamline library support services — enabling users to instantly query book availability, library hours, and policies through a smart, conversational chat interface without requiring human assistance, delivering a fast, accurate, and user-friendly experience powered by natural language understanding and intent-based response automation.</p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:0.4rem; margin-top:0.2rem;">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Rasa (NLU, Core, Stories, Domain)</span>
+                <span class="skill-tag">Flask</span>
+                <span class="skill-tag">HTML, CSS</span>
+                <span class="skill-tag">Rasa NLU Pipeline</span>
+                <span class="skill-tag">Rasa Core (Rules, Stories)</span>
+                <span class="skill-tag">REST API (Rasa Webhook)</span>
+                <span class="skill-tag">YAML (training data, domain, config)</span>     
+                <span class="skill-tag">Git</span> 
+                <span class="skill-tag">Rasa Shell, Rasa Interactive</span>
+                <span class="skill-tag">VS Code / PyCharm</span>
+              </div>
+              <a href="https://massachusetts-library-chatbot-flotx5f9u.vercel.app/" target="_blank"
+                style="display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1rem;
+                       background:rgba(26,108,246,0.1); border:1px solid rgba(26,108,246,0.25);
+                       border-radius:8px; color:var(--blue2); font-size:0.78rem; font-weight:500;
+                       text-decoration:none; transition:all 0.2s; width:fit-content;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ PROJECT 4 ══ -->
+        <div style="min-width:calc(33.333% - 1rem); flex-shrink:0;">
+          <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column;">
+           
+            <!-- Media -->
+<div style="width:100%; aspect-ratio:16/9; background:var(--navy2); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; overflow:hidden;">
+  <video autoplay muted loop controls width="100%" height="100%" style="position:absolute; inset:0; object-fit:cover;">
+    <source src="projects\braintumor.mp4" type="video/mp4">
+  </video>
+</div>
+            <div style="padding:1.4rem; display:flex; flex-direction:column; flex:1; gap:0.5rem;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:0.68rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Subject:</span>
+                <span style="font-size:0.68rem; color:var(--blue2); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">AI in Healthcare</span>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Title:</span>
+                <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); line-height:1.3; margin:0;">Brain Tumor Recognition</h3>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px; flex:1;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Purpose:</span>
+                <p style="font-size:0.80rem; color:var(--muted); line-height:1.6; margin:0;">AI-powered web application that detects and classifies brain tumors from MRI scans using machine learning. Built with a modern full-stack setup, the system enables fast, accurate, and user-friendly medical image analysis.</p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:0.4rem; margin-top:0.2rem;">
+                <span class="skill-tag">Next.js</span>
+                <span class="skill-tag">Tailwind CSS</span>
+                <span class="skill-tag">Firebase</span>
+                <span class="skill-tag">Machine Learning</span>
+                <span class="skill-tag">CNN</span>
+                <span class="skill-tag">Medical Imaging</span>
+              </div>
+              <a href="https://brain-tumor-recognition.vercel.app/" target="_blank"
+                style="display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1rem;
+                       background:rgba(26,108,246,0.1); border:1px solid rgba(26,108,246,0.25);
+                       border-radius:8px; color:var(--blue2); font-size:0.78rem; font-weight:500;
+                       text-decoration:none; transition:all 0.2s; width:fit-content;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ PROJECT 5 ══ -->
+        <div style="min-width:calc(33.333% - 1rem); flex-shrink:0;">
+          <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column;">
+           
+            <!-- Media -->
+<div style="width:100%; aspect-ratio:16/9; background:var(--navy2); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; overflow:hidden;">
+  <video autoplay muted loop controls width="100%" height="100%" style="position:absolute; inset:0; object-fit:cover;">
+    <source src="projects\plantleafdetection.mp4" type="video/mp4">
+  </video>
+</div>
+            <div style="padding:1.4rem; display:flex; flex-direction:column; flex:1; gap:0.5rem;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:0.68rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Subject:</span>
+                <span style="font-size:0.68rem; color:var(--blue2); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Computer Vision</span>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Title:</span>
+                <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); line-height:1.3; margin:0;">Plant Disease Detection</h3>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px; flex:1;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Purpose:</span>
+                <p style="font-size:0.80rem; color:var(--muted); line-height:1.6; margin:0;">This project focuses on detecting plant leaf diseases using image classification techniques. Users can upload images of plant leaves, and the system predicts the type of disease or identifies if the leaf is healthy.
+
+The application is built using Next.js for the frontend, Tailwind CSS for styling, and Firebase for backend services and deployment. The machine learning model is trained to recognize patterns in leaf images for accurate disease classification.</p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:0.4rem; margin-top:0.2rem;">
+                <span class="skill-tag">Next.js</span>
+                <span class="skill-tag">Tailwind CSS</span>
+                <span class="skill-tag">Firebase</span>
+                <span class="skill-tag">Machine Learning</span>
+                <span class="skill-tag">CNN</span>
+                <span class="skill-tag">Computer Vision</span>
+              </div>
+              <a href="https://leaf-disease-detection-nu.vercel.app/" target="_blank"
+                style="display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1rem;
+                       background:rgba(26,108,246,0.1); border:1px solid rgba(26,108,246,0.25);
+                       border-radius:8px; color:var(--blue2); font-size:0.78rem; font-weight:500;
+                       text-decoration:none; transition:all 0.2s; width:fit-content;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ PROJECT 6 ══ -->
+        <div style="min-width:calc(33.333% - 1rem); flex-shrink:0;">
+          <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column;">
+           
+            <!-- Media -->
+<div style="width:100%; aspect-ratio:16/9; background:var(--navy2); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; overflow:hidden;">
+  <video autoplay muted loop controls width="100%" height="100%" style="position:absolute; inset:0; object-fit:cover;">
+    <source src="projects\usastockmarketvisualization.mp4" type="video/mp4">
+  </video>
+</div>
+            <div style="padding:1.4rem; display:flex; flex-direction:column; flex:1; gap:0.5rem;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:0.68rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Subject:</span>
+                <span style="font-size:0.68rem; color:var(--blue2); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Data Visualization</span>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Title:</span>
+                <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); line-height:1.3; margin:0;">USA-Stock-Market-Visualizations</h3>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px; flex:1;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Purpose:</span>
+                <p style="font-size:0.80rem; color:var(--muted); line-height:1.6; margin:0;">Created interactive data visualizations for USA stock market trends, enabling stakeholders to make informed investment decisions based on real-time analytics.</p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:0.4rem; margin-top:0.2rem;">
+                <span class="skill-tag">HTML</span>
+                <span class="skill-tag">CSS</span>
+                <span class="skill-tag">JS</span>
+                <span class="skill-tag">Data Analysis</span>
+                <span class="skill-tag">Visualization</span>
+                <span class="skill-tag">D3.js</span>
+                <span class="skill-tag">Delta Tables</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">VS Code</span>
+                <span class="skill-tag">Jupyter Notebook</span>
+              </div>
+              <a href="https://vishvanath0523.github.io/USA-Stock-Market-Visualizations/" target="_blank"
+                style="display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1rem;
+                       background:rgba(26,108,246,0.1); border:1px solid rgba(26,108,246,0.25);
+                       border-radius:8px; color:var(--blue2); font-size:0.78rem; font-weight:500;
+                       text-decoration:none; transition:all 0.2s; width:fit-content;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <!-- ══ PROJECT 7 ══ -->
+        <div style="min-width:calc(33.333% - 1rem); flex-shrink:0;">
+          <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column;">
+           
+            <!-- Media -->
+<div style="width:100%; aspect-ratio:16/9; background:var(--navy2); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; overflow:hidden;">
+  <video autoplay muted loop controls width="100%" height="100%" style="position:absolute; inset:0; object-fit:cover;">
+    <source src="projects\splitamountapp.mp4" type="video/mp4">
+  </video>
+</div>
+            <div style="padding:1.4rem; display:flex; flex-direction:column; flex:1; gap:0.5rem;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:0.68rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Subject:</span>
+                <span style="font-size:0.68rem; color:var(--blue2); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Full Stack Development</span>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Title:</span>
+                <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); line-height:1.3; margin:0;">Splittingapp</h3>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px; flex:1;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Purpose:</span>
+                <p style="font-size:0.80rem; color:var(--muted); line-height:1.6; margin:0;">A user-friendly web application that simplifies splitting expenses among groups, allowing users to track shared costs and settle balances efficiently.</p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:0.4rem; margin-top:0.2rem;">
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">Next.js</span>
+                <span class="skill-tag">Tailwind CSS</span>
+                <span class="skill-tag">Full Stack</span>
+                <span class="skill-tag">Web Development</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">VS Code</span>
+              </div>
+              <a href="https://vishvanath0523.github.io/Spilttingapp/" target="_blank"
+                style="display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1rem;
+                       background:rgba(26,108,246,0.1); border:1px solid rgba(26,108,246,0.25);
+                       border-radius:8px; color:var(--blue2); font-size:0.78rem; font-weight:500;
+                       text-decoration:none; transition:all 0.2s; width:fit-content;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+
+<!-- ══ PROJECT 8 ══ -->
+        <div style="min-width:calc(33.333% - 1rem); flex-shrink:0;">
+          <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column;">
+           
+            <!-- Media -->
+<div style="width:100%; aspect-ratio:16/9; background:var(--navy2); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; overflow:hidden;">
+  <video autoplay muted loop controls width="100%" height="100%" style="position:absolute; inset:0; object-fit:cover;">
+    <source src="projects\neurovistaexplorer.mp4" type="video/mp4">
+  </video>
+</div>
+            <div style="padding:1.4rem; display:flex; flex-direction:column; flex:1; gap:0.5rem;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:0.68rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Subject:</span>
+                <span style="font-size:0.68rem; color:var(--blue2); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Medical Imaging & Data Visualization</span>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Title:</span>
+                <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); line-height:1.3; margin:0;">NeuroVista Explorer</h3>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px; flex:1;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Purpose:</span>
+                <p style="font-size:0.80rem; color:var(--muted); line-height:1.6; margin:0;">Interactive CT-scan viewer with real-time threshold & histogram controls. Built from scratch in vanilla HTML, CSS, and JavaScript—zero frameworks.</p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:0.4rem; margin-top:0.2rem;">
+                <span class="skill-tag">HTML</span>
+                <span class="skill-tag">CSS</span>
+                <span class="skill-tag">JS</span>
+                <span class="skill-tag">Data Analysis</span>
+                <span class="skill-tag">Visualization</span>
+                <span class="skill-tag">D3.js</span>
+                <span class="skill-tag">Delta Tables</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">VS Code</span>
+                <span class="skill-tag">Jupyter Notebook</span>
+              </div>
+              <a href="https://vishvanath0523.github.io/CT-Scan-Visualization/" target="_blank"
+                style="display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1rem;
+                       background:rgba(26,108,246,0.1); border:1px solid rgba(26,108,246,0.25);
+                       border-radius:8px; color:var(--blue2); font-size:0.78rem; font-weight:500;
+                       text-decoration:none; transition:all 0.2s; width:fit-content;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ PROJECT 9 ══ -->
+        <div style="min-width:calc(33.333% - 1rem); flex-shrink:0;">
+          <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column;">
+           
+            <!-- Media -->
+<div style="width:100%; aspect-ratio:16/9; background:var(--navy2); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; overflow:hidden;">
+  <video autoplay muted loop controls width="100%" height="100%" style="position:absolute; inset:0; object-fit:cover;">
+    <source src="projects\netflixvisualization.mp4" type="video/mp4">
+  </video>
+</div>
+            <div style="padding:1.4rem; display:flex; flex-direction:column; flex:1; gap:0.5rem;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:0.68rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Subject:</span>
+                <span style="font-size:0.68rem; color:var(--blue2); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Business Intelligence</span>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Title:</span>
+                <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); line-height:1.3; margin:0;">Netflix Movie Visualization</h3>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px; flex:1;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Purpose:</span>
+                <p style="font-size:0.80rem; color:var(--muted); line-height:1.6; margin:0;">Explore Netflix's worldwide library through an interactive dashboard that breaks down title counts, genre trends, and ratings—with one-click access to individual title details.</p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:0.4rem; margin-top:0.2rem;">
+                <span class="skill-tag">Tableau</span>
+                <span class="skill-tag">Data Analysis</span>
+                <span class="skill-tag">Visualization</span>
+              </div>
+              <a href="https://public.tableau.com/app/profile/vishvanath.madasamy/viz/NetflixMovieRepresentation/Dashboard1" target="_blank"
+                style="display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1rem;
+                       background:rgba(26,108,246,0.1); border:1px solid rgba(26,108,246,0.25);
+                       border-radius:8px; color:var(--blue2); font-size:0.78rem; font-weight:500;
+                       text-decoration:none; transition:all 0.2s; width:fit-content;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on Tableau
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- ══ PROJECT 10 ══ -->
+        <div style="min-width:calc(33.333% - 1rem); flex-shrink:0;">
+          <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column;">
+           
+            <!-- Media -->
+<div style="width:100%; aspect-ratio:16/9; background:var(--navy2); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; overflow:hidden;">
+  <video autoplay muted loop controls width="100%" height="100%" style="position:absolute; inset:0; object-fit:cover;">
+    <source src="projects\ibmashboard.mp4" type="video/mp4">
+  </video>
+</div>
+            <div style="padding:1.4rem; display:flex; flex-direction:column; flex:1; gap:0.5rem;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:0.68rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Subject:</span>
+                <span style="font-size:0.68rem; color:var(--blue2); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Exploratory Data Analysis (EDA)</span>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Title:</span>
+                <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); line-height:1.3; margin:0;">IBM HR Visualization</h3>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px; flex:1;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Purpose:</span>
+                <p style="font-size:0.80rem; color:var(--muted); line-height:1.6; margin:0;">Analyze and visualize IBM's human resources data to identify trends, patterns, and insights for better decision-making.</p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:0.4rem; margin-top:0.2rem;">
+                <span class="skill-tag">Tableau</span>
+                <span class="skill-tag">Data Analysis</span>
+                <span class="skill-tag">Visualization</span>
+              </div>
+              <a href="https://public.tableau.com/app/profile/vishvanath.madasamy/viz/IBMHR_17328062571140/Dashboard1" target="_blank"
+                style="display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1rem;
+                       background:rgba(26,108,246,0.1); border:1px solid rgba(26,108,246,0.25);
+                       border-radius:8px; color:var(--blue2); font-size:0.78rem; font-weight:500;
+                       text-decoration:none; transition:all 0.2s; width:fit-content;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on Tableau
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- ══ PROJECT 11 ══ -->
+        <div style="min-width:calc(33.333% - 1rem); flex-shrink:0;">
+          <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column;">
+           
+            <!-- Media -->
+<div style="width:100%; aspect-ratio:16/9; background:var(--navy2); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; overflow:hidden;">
+  <video autoplay muted loop controls width="100%" height="100%" style="position:absolute; inset:0; object-fit:cover;">
+    <source src="projects\geospatialvisualization.mp4" type="video/mp4">
+  </video>
+</div>
+            <div style="padding:1.4rem; display:flex; flex-direction:column; flex:1; gap:0.5rem;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:0.68rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Subject:</span>
+                <span style="font-size:0.68rem; color:var(--blue2); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Spatial Demographic Analysis</span>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Title:</span>
+                <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); line-height:1.3; margin:0;">Massachusetts Geospatial Analysis</h3>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px; flex:1;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Purpose:</span>
+                <p style="font-size:0.80rem; color:var(--muted); line-height:1.6; margin:0;">Conducted geospatial data analysis and visualization for the state of Massachusetts to identify significant trends, patterns, and insights applicable to strategic decision-making.</p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:0.4rem; margin-top:0.2rem;">
+                <span class="skill-tag">HTML</span>
+                <span class="skill-tag">CSS</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">D3.js</span>
+                <span class="skill-tag">Geospatial Analysis</span>
+                <span class="skill-tag">Data Visualization</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">VS Code</span>
+              </div>
+              <a href="https://vishvanath0523.github.io/Geospatial-Visualization/" target="_blank"
+                style="display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1rem;
+                       background:rgba(26,108,246,0.1); border:1px solid rgba(26,108,246,0.25);
+                       border-radius:8px; color:var(--blue2); font-size:0.78rem; font-weight:500;
+                       text-decoration:none; transition:all 0.2s; width:fit-content;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- ══ PROJECT 12 ══ -->
+        <div style="min-width:calc(33.333% - 1rem); flex-shrink:0;">
+          <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column;">
+           
+            <!-- Media -->
+<div style="width:100%; aspect-ratio:16/9; background:var(--navy2); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; overflow:hidden;">
+  <video autoplay muted loop controls width="100%" height="100%" style="position:absolute; inset:0; object-fit:cover;">
+    <source src="projects\authorvisualization.mp4" type="video/mp4">
+  </video>
+</div>
+            <div style="padding:1.4rem; display:flex; flex-direction:column; flex:1; gap:0.5rem;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:0.68rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Subject:</span>
+                <span style="font-size:0.68rem; color:var(--blue2); font-weight:600; text-transform:uppercase; letter-spacing:0.8px;">Pattern Recognition in Networks</span>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Title:</span>
+                <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); line-height:1.3; margin:0;">Global Author Collaboration Network</h3>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:6px; flex:1;">
+                <span style="font-size:0.72rem; color:var(--muted); font-weight:600; white-space:nowrap; margin-top:2px;">Purpose:</span>
+                <p style="font-size:0.80rem; color:var(--muted); line-height:1.6; margin:0;">"Interactive Gephi force-directed graph clusters global author collaborations by connection strength and country color, with real-time physics sliders and a sidebar ranking the top ten contributing nations.</p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:0.4rem; margin-top:0.2rem;">
+                <span class="skill-tag">HTML</span>
+                <span class="skill-tag">CSS</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">D3.js</span>
+                <span class="skill-tag">Geospatial Analysis</span>
+                <span class="skill-tag">Data Visualization</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">VS Code</span>
+              </div>
+              <a href="https://vishvanath0523.github.io/Network-Visualization-/" target="_blank"
+                style="display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1rem;
+                       background:rgba(26,108,246,0.1); border:1px solid rgba(26,108,246,0.25);
+                       border-radius:8px; color:var(--blue2); font-size:0.78rem; font-weight:500;
+                       text-decoration:none; transition:all 0.2s; width:fit-content;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+        
+
+         </div>
+    </div>
+
+
+    <!-- Dot Indicators -->
+    <div id="projDots" style="display:flex; justify-content:center; gap:8px; margin-top:1.8rem;"></div>
+
+  </div>
+</section>
+</div>
+
+
+
+<!-- ══════════════ CONTACT ══════════════ -->
+<div id="contact" style="background:linear-gradient(135deg,rgba(26,108,246,0.06) 0%,rgba(124,58,237,0.04) 100%);border-top:1px solid var(--border);">
+<section style="max-width:1200px;margin:0 auto;text-align:center;">
+  <p class="section-title reveal">Get In Touch</p>
+  <div class="section-line reveal"></div>
+  <p class="contact-subtitle reveal">
+    I'm always interested in discussing new opportunities, collaborations, or challenging projects. Feel free to reach out!
+  </p>
+  <div class="contact-cards reveal">
+    <a href="https://mail.google.com/mail/?view=cm&to=vishvanathmadasamyofficial@gmail.com" class="contact-card" target="_blank">
+      <div class="contact-card-icon">✉️</div>
+      <h4>Email</h4>
+      <p><span class="__cf_email__" data-cfemail="601609130816010e0114080d01040113010d190f0606090309010c20070d01090c4e030f0d">[vishvanathmadasamyofficial@gmail.com]</span></p>
+    </a>
+    <a href="https://www.linkedin.com/in/vishvanath-madasamy/" class="contact-card" target="_blank">
+      <div class="contact-card-icon">💼</div>
+      <h4>LinkedIn</h4>
+      <p>linkedin.com/in/vishvanath-madasamy/</p>
+    </a>
+    <a href="resume.pdf" class="contact-card" target="_blank">
+      <div class="contact-card-icon">📄</div>
+      <h4>Resume</h4>
+      <p>View my resume</p>
+    </a>
+  </div>
+  <div class="cta-box reveal">
+    <h3>Let's Build Something Great</h3>
+    <p>Whether it's Data Engineering, LLM applications, IT Systems or analytics platforms, I'm excited to bring technical expertise and creative problem-solving to your next project.</p>
+    <a href="https://mail.google.com/mail/?view=cm&to=vishvanathmadasamyofficial@gmail.com" class="btn-primary" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="2" y="4" width="20" height="16" rx="2"/>
+        <path d="m22 7-10 7L2 7"/>
+      </svg>
+      Start a Conversation
+    </a>
+  </div>
+  <div class="footer-line reveal">
+    © 2026 Vishvanath Madasamy. All rights reserved.
+  </div>
+</section>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── Custom cursor ──
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animCursor() {
+    cursor.style.transform = `translate(${mx-5}px, ${my-5}px)`;
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.transform = `translate(${rx-18}px, ${ry-18}px)`;
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.width='54px'; ring.style.height='54px'; ring.style.marginLeft='-9px'; ring.style.marginTop='-9px'; });
+    el.addEventListener('mouseleave', () => { ring.style.width='36px'; ring.style.height='36px'; ring.style.marginLeft='0'; ring.style.marginTop='0'; });
+  });
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Nav scroll effect ──
+  window.addEventListener('scroll', () => {
+    const isDark = document.body.classList.contains('dark');
+    document.querySelector('nav').style.background = window.scrollY > 50
+      ? (isDark ? 'rgba(5,13,31,0.97)' : 'rgba(248,250,255,0.98)')
+      : (isDark ? 'rgba(5,13,31,0.85)' : 'rgba(248,250,255,0.92)');
+  });
+
+  // ── Theme toggle ──
+  function toggleTheme() {
+    const isDark = document.body.classList.toggle('dark');
+    document.getElementById('toggleIcon').textContent = isDark ? '🌙' : '☀️';
+    document.getElementById('toggleLabel').textContent = isDark ? 'Dark' : 'Light';
+    const scrolled = window.scrollY > 50;
+    document.querySelector('nav').style.background = scrolled
+      ? (isDark ? 'rgba(5,13,31,0.97)' : 'rgba(248,250,255,0.98)')
+      : (isDark ? 'rgba(5,13,31,0.85)' : 'rgba(248,250,255,0.92)');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark');
+    document.getElementById('toggleIcon').textContent = '🌙';
+    document.getElementById('toggleLabel').textContent = 'Dark';
+  }
+
+  // ── Project Slider (exactly 3 per page) ──
+(function() {
+  const track = document.getElementById('projTrack');
+  const dotsContainer = document.getElementById('projDots');
+  const visibleCount = 3;
+  const gap = 24;
+  let currentPage = 0;
+
+  function getTotalPages() {
+    return Math.ceil(track.children.length / visibleCount);
+  }
+
+  function getCardWidth() {
+    return (track.parentElement.offsetWidth - gap * (visibleCount - 1)) / visibleCount;
+  }
+
+  function setCardWidths() {
+    const cardWidth = getCardWidth();
+    Array.from(track.children).forEach(card => {
+      card.style.width = cardWidth + 'px';
+      card.style.minWidth = cardWidth + 'px';
+      card.style.maxWidth = cardWidth + 'px';
+      card.style.flexShrink = '0';
+    });
+  }
+
+  function equalizePageHeights() {
+    const cards = Array.from(track.children);
+    const totalPages = getTotalPages();
+    // First reset all heights so we get natural height
+    cards.forEach(c => { c.style.height = 'auto'; });
+    // Then for each page group, force all cards to the tallest one
+    for (let p = 0; p < totalPages; p++) {
+      const pageCards = cards.slice(p * visibleCount, p * visibleCount + visibleCount);
+      const maxH = Math.max(...pageCards.map(c => c.offsetHeight));
+      pageCards.forEach(c => { c.style.height = maxH + 'px'; });
+    }
+  }
+
+  function applyTransform() {
+    const cardWidth = getCardWidth();
+    // Move exactly: (3 cards * cardWidth) + (3 gaps) per page
+    const pageWidth = (cardWidth * visibleCount) + (gap * visibleCount);
+    track.style.transform = `translateX(-${currentPage * pageWidth}px)`;
+  }
+
+  function buildDots() {
+    dotsContainer.innerHTML = '';
+    const totalPages = getTotalPages();
+    for (let i = 0; i < totalPages; i++) {
+      const dot = document.createElement('div');
+      dot.style.cssText = `
+        width:${i === 0 ? '24px' : '8px'};
+        height:8px;
+        border-radius:100px;
+        background:${i === 0 ? 'var(--blue)' : 'var(--border)'};
+        cursor:pointer;
+        transition:all 0.3s;
+      `;
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function updateDots() {
+    Array.from(dotsContainer.children).forEach((dot, i) => {
+      dot.style.width = i === currentPage ? '24px' : '8px';
+      dot.style.background = i === currentPage ? 'var(--blue)' : 'var(--border)';
+    });
+  }
+
+  function goTo(page) {
+    const totalPages = getTotalPages();
+    // Wrap around: last → first, first → last
+    currentPage = ((page % totalPages) + totalPages) % totalPages;
+    applyTransform();
+    updateDots();
+  }
+
+  window.moveProjSlide = function(dir) {
+    goTo(currentPage + dir);
+  };
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') goTo(currentPage - 1);
+    if (e.key === 'ArrowRight') goTo(currentPage + 1);
+  });
+
+  window.addEventListener('resize', () => {
+    setCardWidths();
+    equalizePageHeights();
+    applyTransform();
+  });
+
+  // Init — wait for layout to settle
+  setTimeout(() => {
+    setCardWidths();
+    equalizePageHeights();
+    buildDots();
+    applyTransform();
+  }, 150);
+
+})();
+</script>
+</body>
+</html>
